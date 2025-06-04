@@ -2,7 +2,7 @@ from DataFrame import load_data
 from Models import fit_ma
 import matplotlib.pyplot as plt
 
-df = load_data(r"04 khordad\Time Serise\14 khordad AR\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
+df = load_data(r"04 khordad\Time Serise\14 khordad 02 MA\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
 series = df['close']
 
 # Fit MA model
