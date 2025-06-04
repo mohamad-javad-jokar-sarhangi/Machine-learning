@@ -1,16 +1,10 @@
 import pandas as pd
 
-def load_data(path):
-    # اگر جداکننده فایل tab بود: sep='\t' اضافه کن
-    df = pd.read_csv(path,delimiter="\t", header=None)
-    df.columns = ['date', 'open', 'high', 'low', 'close', 'volume']
-    df = df[['date', 'close']]
-    df['date'] = pd.to_datetime(df['date'])
-    df = df.sort_values('date').reset_index(drop=True)
-    return df
-
-def train_test_split(df, split_ratio=0.8):
-    split = int(len(df) * split_ratio)
-    train = df.iloc[:split]
-    test = df.iloc[split:]
+def load_air_passengers(file_path, test_size=12):
+    df = pd.read_csv(file_path, parse_dates=['Month'])
+    df = df.rename(columns={'Month': 'date', 'Passengers': 'value'})
+    df = df.set_index('date')
+    # تقسیم سری به train/test
+    train = df.iloc[:-test_size]
+    test = df.iloc[-test_size:]
     return train, test

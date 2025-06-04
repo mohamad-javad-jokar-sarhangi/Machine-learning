@@ -1,19 +1,28 @@
-from DataFrame import load_data, train_test_split
-from Models import train_ar, forecast_ar
 import matplotlib.pyplot as plt
+from DataFrame import load_air_passengers
+from Models import fit_ar, predict_ar_recursive
 
-df = load_data(r"04 khordad\Time Serise\14 khordad 01 AR\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
-train, test = train_test_split(df, split_ratio=0.8)
+train, test = load_air_passengers(r"04 khordad\Time Serise\14 khordad 01 AR\AirPassnger.csv")
 
-ar_model = train_ar(train['close'], lags=1000)
-steps = len(test)
-preds = forecast_ar(ar_model, steps=steps)
+lags = 3
 
-plt.plot(list(train['date']) + list(test['date']),
-         list(train['close']) + list(test['close']), label='True Data')
-plt.plot(test['date'], preds, label='AR Prediction')
+ar_model = fit_ar(train, lags=lags)
+
+# استفاده از پیش‌بینی recursive (واقع‌گرایانه و عملی)
+preds = predict_ar_recursive(train, test, lags=lags)
+
+# برای رسم مقادیر پیش‌بینی شده باید ایندکس تست رو بهش بدی
+plt.figure(figsize=(10,6))
+plt.plot(train.index, train['value'], label='Train')
+plt.plot(test.index, test['value'], label='Test')
+plt.plot(test.index, preds, label='Predicted', linestyle='dashed', color='green')
 plt.legend()
 plt.xlabel('Date')
-plt.ylabel('Close Price')
-plt.title('AR Model for Gold Close Price')
+plt.ylabel('Number of Passengers')
+plt.title('AR Model Prediction vs Actual (AirPassengers Dataset)')
 plt.show()
+
+# MAE
+import numpy as np
+mae = np.abs(np.array(preds) - test['value'].values).mean()
+print(f"Mean Absolute Error (MAE): {mae:.2f}")
