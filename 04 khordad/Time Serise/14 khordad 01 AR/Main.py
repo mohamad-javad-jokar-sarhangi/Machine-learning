@@ -1,13 +1,10 @@
 import matplotlib.pyplot as plt
 from DataFrame import load_air_passengers
-from Models import fit_ar, predict_ar_recursive
+from Models import predict_ar_recursive
 
 train, test = load_air_passengers(r"04 khordad\Time Serise\14 khordad 01 AR\AirPassnger.csv")
 
 lags = 30
-
-ar_model = fit_ar(train, lags=lags)
-
 # استفاده از پیش‌بینی recursive (واقع‌گرایانه و عملی)
 preds = predict_ar_recursive(train, test, lags=lags)
 
