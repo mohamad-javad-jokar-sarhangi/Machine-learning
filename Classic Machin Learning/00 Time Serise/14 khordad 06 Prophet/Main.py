@@ -9,7 +9,7 @@ df_prophet = df.rename(columns={'date':'ds', 'close':'y'})[['ds','y']]
 # Train/Test split (Prophet کل سری رو model میکنه و future رو پیش‌بینی میکنه)
 periods = 30  # مثلا 30 روز آینده
 
-model, forecast = fit_prophet(df_prophet, periods=periods, freq='D')
+model, forecast = fit_prophet(df_prophet, periods=periods, freq='M')
 
 plt.figure(figsize=(14,5))
 plt.plot(df_prophet['ds'], df_prophet['y'], label='True Data')
