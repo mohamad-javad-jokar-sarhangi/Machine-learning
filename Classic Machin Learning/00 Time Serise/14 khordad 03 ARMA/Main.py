@@ -2,7 +2,7 @@ from DataFrame import load_data
 from Models import fit_arma
 import matplotlib.pyplot as plt
 
-df = load_data(r"04 khordad\Time Serise\14 khordad 03 ARMA\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
+df = load_data(r"Classic Machin Learning\00 Time Serise\14 khordad 03 ARMA\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
 series = df['close']
 
 train_size = int(0.7 * len(series))  # یا درصد دلخواه

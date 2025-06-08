@@ -3,7 +3,7 @@ from Models import fit_prophet
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = load_data(r"04 khordad\Time Serise\14 khordad 05 SARIMA\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
+df = load_data(r"Classic Machin Learning\00 Time Serise\14 khordad 05 SARIMA\XAUUSD D1 2008-08-08 to 2025-04-18.csv")
 df_prophet = df.rename(columns={'date':'ds', 'close':'y'})[['ds','y']]
 
 # Train/Test split (Prophet کل سری رو model میکنه و future رو پیش‌بینی میکنه)

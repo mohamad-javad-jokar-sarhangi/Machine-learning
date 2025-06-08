@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from DataFrame import load_air_passengers
 from Models import predict_ar_recursive
 
-train, test = load_air_passengers(r"04 khordad\Time Serise\14 khordad 01 AR\AirPassnger.csv")
+train, test = load_air_passengers(r"Classic Machin Learning\00 Time Serise\14 khordad 01 AR\AirPassnger.csv")
 
 lags = 30
 # استفاده از پیش‌بینی recursive (واقع‌گرایانه و عملی)
