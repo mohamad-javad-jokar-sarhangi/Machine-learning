@@ -21,7 +21,7 @@ random.seed(42)
 # --- 1. بارگذاری دیتا و تبدیل تاریخ ---
 # 01
 df = pd.read_csv(
-    r'Deep Learning\00 LSTM\09 tir Level 01\XAUUSD D1 2008-08-08 to 2025-04-18.csv',
+    r'Deep Learning\00 LSTM\09 tir Level 01 Normal LSTM\XAUUSD D1 2008-08-08 to 2025-04-18.csv',
     sep='	',
     header=None,
     names=['Date', 'Open', 'High', 'Low', 'Close', 'Volume']

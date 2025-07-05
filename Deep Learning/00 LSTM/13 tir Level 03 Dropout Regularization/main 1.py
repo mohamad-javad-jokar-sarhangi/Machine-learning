@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 ### Part 2 Create LSTM with Keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
+from tensorflow.keras import regularizers
 ### Part 3 Show Result
 import matplotlib.pyplot as plt
 
@@ -21,7 +22,7 @@ random.seed(42)
 # --- 1. بارگذاری دیتا و تبدیل تاریخ ---
 # 01
 df = pd.read_csv(
-    r'Deep Learning\00 LSTM\09 tir Level 01\XAUUSD D1 2008-08-08 to 2025-04-18.csv',
+    r'Deep Learning\00 LSTM\13 tir Level 03 Dropout Regularization\XAUUSD D1 2008-08-08 to 2025-04-18.csv',
     sep='	',
     header=None,
     names=['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
@@ -54,7 +55,7 @@ for i in range(window, len(data)):
 
 X, y = np.array(X), np.array(y)    # X.shape=(نمونه, window, ویژگی)
 
-# 08
+# 08                                         
 # --- 4. تقسیم بر اساس زمان (نه تصادفی) ---
 split_index = int(0.8 * len(X))
 X_train, X_test = X[:split_index], X[split_index:]
@@ -64,9 +65,27 @@ y_train, y_test = y[:split_index], y[split_index:]
 # 01
 # --- 1. تعریف مدل ---
 model = Sequential()
-model.add(LSTM(64, input_shape=(window, len(feat_cols)), return_sequences=False))
+model.add(LSTM(128, 
+               return_sequences=True, 
+               input_shape=(window, len(feat_cols)), 
+               kernel_regularizer=regularizers.l2(0.001)))
+
+model.add(Dropout(0.3))
+
+model.add(LSTM(64, 
+               return_sequences=True, 
+               kernel_regularizer=regularizers.l2(0.001)))
+
+model.add(Dropout(0.3))
+
+model.add(LSTM(32, 
+               return_sequences=False, 
+               kernel_regularizer=regularizers.l2(0.001)))
+
 model.add(Dropout(0.2))
-model.add(Dense(1))  # خروجی عددی
+
+model.add(Dense(32, activation='relu'))
+model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
 
@@ -98,7 +117,7 @@ plt.figure(figsize=(12,5))
 plt.plot(y_test_rescaled, label='Real', color='red')
 plt.plot(y_pred_rescaled, label='Perdiction', color='blue')
 plt.legend()
-plt.title('Perdiction Close with LSTM')
+plt.title('Perdiction Close with LSTM LEVE 3')
 plt.xlabel('Sample')
 plt.ylabel('Close')
 plt.show()

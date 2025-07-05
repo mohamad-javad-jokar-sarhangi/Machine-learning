@@ -21,7 +21,7 @@ random.seed(42)
 # --- 1. بارگذاری دیتا و تبدیل تاریخ ---
 # 01
 df = pd.read_csv(
-    r'Deep Learning\00 LSTM\09 tir Level 02\XAUUSD D1 2008-08-08 to 2025-04-18.csv',
+    r'Deep Learning\00 LSTM\09 tir Level 01 Normal LSTM\XAUUSD D1 2008-08-08 to 2025-04-18.csv',
     sep='	',
     header=None,
     names=['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
@@ -99,7 +99,7 @@ plt.figure(figsize=(12,5))
 plt.plot(y_test_rescaled, label='Real', color='red')
 plt.plot(y_pred_rescaled, label='Perdiction', color='blue')
 plt.legend()
-plt.title('Perdiction Close with LSTM')
+plt.title('Perdiction Close with LSTM LEVEL 2')
 plt.xlabel('Sample')
 plt.ylabel('Close')
 plt.show()
