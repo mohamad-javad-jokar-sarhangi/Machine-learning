@@ -62,7 +62,7 @@ history = model.fit(
     epochs=20,              # هرچقدر صلاح دونستی زیاد/کم کن
     batch_size=32,
     validation_split=0.1,
-    verbose=2
+    verbose=1
 )
 
 # ======== 7. ارزیابی مدل =========
